@@ -1,3 +1,5 @@
+package Recursion;
+
 import java.util.*;
 
 
@@ -50,6 +52,7 @@ public class Subsequence {
             arr[i] = sc.nextInt();
         }
         ArrayList<Integer> arr1 = new ArrayList<>();
+        f(0, arr, arr1, n);
         f(0, arr, arr1, n);
     }
 }
