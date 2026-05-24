@@ -1,3 +1,13 @@
+# Java
+*.class
+
+# macOS
+.DS_Store
+
+# IntelliJ
+.idea/
+*.iml
+
 # Prerequisites
 *.d
 
