@@ -83,19 +83,42 @@ public class DailyTemperatures {
         return answer;
     }
 
+    // ---- Traversing from BACK (right to left) ----
+    // Stack holds indices of future days in decreasing temperature order.
+    // For each day, pop everything cooler (useless), then stack top is the answer.
+    public int[] dailyTemperaturesFromBack(int[] temperatures) {
+        int n = temperatures.length;
+        int[] answer = new int[n];
+        Stack<Integer> stack = new Stack<>(); // stores indices
+
+        for (int i = n - 1; i >= 0; i--) {
+            // Pop all future days that are NOT warmer than today.
+            while (!stack.isEmpty() && temperatures[stack.peek()] <= temperatures[i]) {
+                stack.pop();
+            }
+            // Stack top is the nearest warmer day to the right.
+            answer[i] = stack.isEmpty() ? 0 : stack.peek() - i;
+            stack.push(i);
+        }
+        return answer;
+    }
+
     public static void main(String[] args) {
         DailyTemperatures sol = new DailyTemperatures();
 
         int[] t1 = {73, 74, 75, 71, 69, 72, 76, 73};
         System.out.println("Deque:  " + Arrays.toString(sol.dailyTemperatures(t1)));
         System.out.println("Stack:  " + Arrays.toString(sol.dailyTemperaturesStack(t1)));
+        System.out.println("Back:   " + Arrays.toString(sol.dailyTemperaturesFromBack(t1)));
 
         int[] t2 = {30, 40, 50, 60};
         System.out.println("Deque:  " + Arrays.toString(sol.dailyTemperatures(t2)));
         System.out.println("Stack:  " + Arrays.toString(sol.dailyTemperaturesStack(t2)));
+        System.out.println("Back:   " + Arrays.toString(sol.dailyTemperaturesFromBack(t2)));
 
         int[] t3 = {30, 60, 90};
         System.out.println("Deque:  " + Arrays.toString(sol.dailyTemperatures(t3)));
         System.out.println("Stack:  " + Arrays.toString(sol.dailyTemperaturesStack(t3)));
+        System.out.println("Back:   " + Arrays.toString(sol.dailyTemperaturesFromBack(t3)));
     }
 }
