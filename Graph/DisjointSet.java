@@ -8,6 +8,11 @@ class DisjointSet{
         rank = new ArrayList<>();
         parent = new ArrayList<>();
         size = new ArrayList<>();
+        for (int i = 0; i <= n; i++) {
+            rank.add(0);
+            parent.add(i);
+            size.add(1);
+        }
     }
 
     public int findUlpParent(int node){
